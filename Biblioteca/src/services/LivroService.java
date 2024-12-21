@@ -16,8 +16,7 @@ public class LivroService {
     }
     
     public List<Livro> listar(){
-        List<Livro> livros = livroRepository.listar();
-        return livros;
+        return livroRepository.listar();
     }
     
     public void imprimir(Livro livro){
@@ -32,13 +31,7 @@ public class LivroService {
     }
     
     public Livro buscar(int id){
-        Livro livro = livroRepository.buscar(id);
-        
-        if(livro == null){
-            return null;
-        } else{
-            return livro;
-        }
+        return livroRepository.buscar(id);
     }
     
     public boolean atualizar(Livro livro){

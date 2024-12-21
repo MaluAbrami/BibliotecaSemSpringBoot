@@ -29,19 +29,11 @@ public class LivroRepository {
         return livros.get(id);
     }
     
-    public boolean atualizar(Livro livro){
-        if(livros.containsKey(livro.getId())){
-            livros.put(livro.getId(), livro);
-            return true;
-        } else
-            return false;
+    public void atualizar(Livro livro){
+        livros.put(livro.getId(), livro);
     }
     
-    public boolean deletar(int id){
-        if(livros.containsKey(id)){
-            livros.remove(id);
-            return true;
-        } else
-            return false;
+    public void deletar(int id){
+        livros.remove(id);
     }
 }

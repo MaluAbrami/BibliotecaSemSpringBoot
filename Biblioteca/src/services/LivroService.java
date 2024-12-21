@@ -13,53 +13,53 @@ public class LivroService {
     
     public void adicionar(Livro livro){
         livroRepository.adicionar(livro);
-        System.out.println("Livro adicionado com sucesso.");
     }
     
-    public void listar(){
+    public List<Livro> listar(){
         List<Livro> livros = livroRepository.listar();
-        
-        if(livros == null){
-            System.out.println("Nenhum livro cadastrado.");
-        } else{
-            for (Livro livro : livros) {
-                String disponibilidade;
-                if (livro.isDisponivel()) {
-                    disponibilidade = "Indisponivel";
-                } else {
-                    disponibilidade = "Disponivel";
-                }
-
-                System.out.println("ID: " + livro.getId() + " | Titulo: " + livro.getTitulo() + " | Autor: " + livro.getAutor() + " | Disponibilidade: " + disponibilidade);
-            }
-        }
+        return livros;
     }
     
-    public void buscar(int id){
+    public void imprimir(Livro livro){
+        String disponibilidade;
+        if (livro.isDisponivel()) {
+            disponibilidade = "Indisponivel";
+        } else {
+            disponibilidade = "Disponivel";
+        }
+
+        System.out.println("ID: " + livro.getId() + " | Titulo: " + livro.getTitulo() + " | Autor: " + livro.getAutor() + " | Disponibilidade: " + disponibilidade);
+    }
+    
+    public Livro buscar(int id){
         Livro livro = livroRepository.buscar(id);
         
         if(livro == null){
-            System.out.println("Erro: Livro nao encontrado.");
+            return null;
         } else{
-            System.out.println("Livro encontrado com sucesso.");
+            return livro;
         }
     }
     
-    public void atualizar(Livro livro){
-        boolean resp = livroRepository.atualizar(livro);
+    public boolean atualizar(Livro livro){
+        Livro l = buscar(livro.getId());
         
-        if(resp)
-            System.out.println("Livro atualizado com sucesso.");
-        else
-            System.out.println("Erro: Livro nao encontrado.");
+        if(l == null)
+            return false;
+        else{
+            livroRepository.atualizar(livro);
+            return true;
+        }
     }
     
-    public void deletar(int id){
-        boolean resp = livroRepository.deletar(id);
+    public boolean deletar(int id){
+        Livro l = buscar(id);
         
-        if(resp)
-            System.out.println("Livro removido com sucesso.");
-        else
-            System.out.println("Erro: Livro nao encontrado.");
+        if(l == null)
+            return false;
+        else{
+            livroRepository.deletar(id);
+            return true;
+        }
     }
 }
